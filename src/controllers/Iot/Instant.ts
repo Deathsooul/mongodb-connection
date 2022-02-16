@@ -25,20 +25,13 @@ class IoTInstant {
       );
 
       // Conexão com o mongo
-      const connection = await main("dev", "livioTemp");
+      const connection = await main("dev", "Temp");
       const result = await connection.insertOne(data, (err, result) => {
         if (err) {
-          console.error(`Erro at setNewDataLivioTemp while inserting ${data["plant"]} `);
+          console.error(`Erro at setNewDataTemp while inserting ${data["plant"]} `);
         }
       });
       console.log(result);
-
-      // // Salvando pacote
-      // await connection.collection("livioTemp").insertOne(data, (err) => {
-      //   if (err) {
-      //     console.error(`Erro at setNewDataLivioTemp while inserting ${data["plant"]} `);
-      //   }
-      // });
       // resposta de retorno
       return response.status(200).send({
         code: "Package saved!",
@@ -46,9 +39,9 @@ class IoTInstant {
       });
     } catch (error) {
       console.error("Package: ", request["body"]);
-      console.error("Error at method setNewDataLivioTemp: ", error);
+      console.error("Error at method setNewDataTemp: ", error);
       return response.status(error["code"] ? error["code"] : 500).send({
-        error: "Error at method setNewDataLivioTemp",
+        error: "Error at method setNewDataTemp",
         message: error["message"],
       });
     }
